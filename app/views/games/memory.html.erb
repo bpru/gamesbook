@@ -1,0 +1,14 @@
+<% provide(:title, "Memory") %>
+<%= javascript_include_tag 'memory' %> 
+<h1>Memory</h1>
+<div id="game">
+	<div id="stat_panel">
+		<p id="time">0:00:0</p>
+	</div>
+	<canvas id="canvas" width="250" height="400" border="5px solid black"></canvas>
+	
+	<div id="ctrl_panel">
+		<button id="btn_start" class="btn btn-primary">start</button>
+		<button id="btn_reset" class="btn btn-primary">reset</button>
+	</div>
+</div>

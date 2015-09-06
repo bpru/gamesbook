@@ -284,3 +284,12 @@ span.picture {
     border: 0;
   }
 }
+
+/* games */
+
+#game {
+  text-align: center;
+  canvas {
+    margin: 5px;
+  }
+}
