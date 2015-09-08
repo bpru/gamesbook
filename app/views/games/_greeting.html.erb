@@ -1,0 +1,5 @@
+<% if logged_in? %>
+    <p>Hi <%= current_user.name %>, welcome to the game!</p>
+<% else %>
+    <p id="guest">Hi there, welcome to the game! <br> In order to make your score recorded, please log in or sign up!</p>
+<% end %>

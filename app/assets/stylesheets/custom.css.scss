@@ -240,7 +240,7 @@ input {
 
 /* microposts */
 
-.microposts {
+.microposts, .memories {
   list-style: none;
   padding: 0;
   li {
@@ -293,3 +293,51 @@ span.picture {
     margin: 5px;
   }
 }
+
+/* tab views */
+#main {
+  > li, > ul > li {
+    list-style: none;
+    float: left;
+  }
+	color: #111;
+	padding:15px 20px;
+	margin: 8px auto;
+	  ul a {
+	  display: block;
+	  padding: 6px 10px;
+	  text-decoration: none!important;
+	  margin: 1px 1px 1px 0;
+	  color: black;
+	  background: 444;
+  }
+}
+
+#main > ul a {
+  color: $gray-light;
+}
+
+#main > ul a:hover {
+	color: #FFF;
+	background: #111;
+}
+#main ul a.selected {
+	margin-bottom: 0;
+	color: black;
+	background: snow;
+	border-bottom: 1px solid snow;
+	cursor: default;
+}
+#main div {
+	padding: 10px 10px 8px 10px;
+// 	*padding-top: 3px;
+// 	*margin-top: -15px;
+	clear: left;
+	background: snow;
+// 	height: 300px;
+}
+#main div a {
+	color: #000;
+	font-weight: bold;
+}
+

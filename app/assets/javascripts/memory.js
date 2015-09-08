@@ -66,6 +66,20 @@ $(document).ready(function() {
 						matched_pairs++;
 						if (matched_pairs == 10) {
 							timer.stop();
+							var msg = 'you spent ' + format_time(time_spent) + "!"
+							setTimeout(function() {
+								if ($("#member").length > 0) {
+									msg += " Do you want to save this record?"
+									if (confirm(msg)) {
+										var score = time_spent; 
+										$.ajax({url: '/memories', type: 'POST', data: {memory: {score: score}}});
+										alert('saved');
+									};
+								} else {
+									var msg = 'you spent ' + format_time(time_spent);
+									alert(msg);
+								}
+							}, 1000);
 						}
 					} else {
 						to_be_unexposed = [idx1, idx2];

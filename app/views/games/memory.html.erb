@@ -1,6 +1,7 @@
 <% provide(:title, "Memory") %>
 <%= javascript_include_tag 'memory' %> 
 <h1>Memory</h1>
+<%= render 'greeting' %>
 <div id="game">
 	<div id="stat_panel">
 		<p id="time">0:00:0</p>
@@ -11,4 +12,5 @@
 		<button id="btn_start" class="btn btn-primary">start</button>
 		<button id="btn_reset" class="btn btn-primary">reset</button>
 	</div>
+	<%= link_to 'Show all records', memories_path %>
 </div>

@@ -1,0 +1,32 @@
+<% provide(:title, "Memory Scores Board") %>
+<%= javascript_include_tag 'jquery.idTabs.min' %> 
+<h1>Memory Scores Board</h1>
+
+<div id="main">
+<!--create tabs-->
+<ul class="idTabs">
+    <li><a href="#all">All Players</a></li>
+    <% if logged_in? %>
+        <li><a href="#user"><%= current_user.name %></a></li>
+    <% end %>
+</ul>
+
+
+<!--all players tab-->
+<div id="all">
+<ul class="memories">
+    <%= render @memories %>
+</ul>
+<%= will_paginate @memories, :param_name => 'all' %>
+</div>
+
+<!--user tab-->
+<% if logged_in? %>
+<div id="user">
+<ul class="memories">
+    <%= render @user_memories, :param_name => 'user' %>
+</ul>
+<%= will_paginate @user_memories %>
+</div>
+<% end %>
+</div>

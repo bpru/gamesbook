@@ -4,6 +4,7 @@
 Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w( games.js )
+Rails.application.config.assets.precompile += %w( jquery.idTabs.min.js )
 Rails.application.config.assets.precompile += %w( testing.js )
 Rails.application.config.assets.precompile += %w( memory.js )
 

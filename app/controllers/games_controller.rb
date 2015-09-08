@@ -5,4 +5,5 @@ class GamesController < ApplicationController
     end
     def memory
     end
+    
 end
