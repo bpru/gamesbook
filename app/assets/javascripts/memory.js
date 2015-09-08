@@ -66,10 +66,10 @@ $(document).ready(function() {
 						matched_pairs++;
 						if (matched_pairs == 10) {
 							timer.stop();
-							var msg = 'you spent ' + format_time(time_spent) + "!"
 							setTimeout(function() {
-								if ($("#member").length > 0) {
-									msg += " Do you want to save this record?"
+								var msg = 'you spent ' + format_time(time_spent) + "!";
+								if (!$("#guest").length > 0) {
+									msg += " Do you want to save this record?";
 									if (confirm(msg)) {
 										var score = time_spent; 
 										$.ajax({url: '/memories', type: 'POST', data: {memory: {score: score}}});
