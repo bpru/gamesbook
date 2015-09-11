@@ -35,10 +35,12 @@ $(document).ready(function() {
     ctx.fillText('Chips: $' + bank, 60, canvas[0].height - 10);
     
     // set images
-    var cards = new Image();
-    var cards_back = new Image();
-    cards.src = '/assets/poker_cards.png';
-    cards_back.src = '/assets/poker_cards_back.png';
+    // var cards = new Image();
+    // var cards_back = new Image();
+    // cards.src = '/assets/poker_cards.png';
+    // cards_back.src = '/assets/poker_cards_back.png';
+    var cards = $("#cards")[0];
+    var cards_back = $("#cards_back")[0];
 
     // set button handlers
 	$("#btn_deal").click(deal);
