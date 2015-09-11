@@ -1,3 +1,4 @@
+//=require_tree ./game_helpers
 $(document).ready(function() {
 	var canvas = $("#canvas")[0];
 	var ctx = canvas.getContext("2d");

@@ -1,0 +1,10 @@
+<% provide(:title, "Stopwatch") %>
+<%= javascript_include_tag "stopwatch" %>
+<h1>Stop Watch</h1>
+<p>Try to stop the watch so that the number of seconds is a whole number!</p>
+<canvas id="canvas" width="630" height="500" background-image="<%= image_tag("stopwatch.png" alt:"stopwatch"></canvas>
+<div id="ctrl_panel">
+	<button id="btn_start" class="button">start</button>
+	<button id="btn_stop" class="button">stop</button>
+	<button id="btn_reset" class="button">reset</button>
+</div>

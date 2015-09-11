@@ -1,0 +1,14 @@
+<% provide(:title, "Space Ship") %>
+<%= javascript_include_tag 'spaceship' %> 
+<h1>Space Ship</h1>
+<%= render 'greeting' %>
+<div id="game">
+	<div id="stat_panel"></div>
+	<canvas id="canvas" width="800" height="600" style="border: 1px solid black" tabindex="1"></canvas>
+	
+	<!--<div id="ctrl_panel">-->
+	<!--	<button id="btn_start" class="btn btn-primary">start</button>-->
+	<!--	<button id="btn_reset" class="btn btn-primary">reset</button>-->
+	<!--</div>-->
+	<!--<%= link_to 'Show all records', memories_path %>-->
+</div>

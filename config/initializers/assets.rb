@@ -7,6 +7,9 @@ Rails.application.config.assets.precompile += %w( games.js )
 Rails.application.config.assets.precompile += %w( jquery.idTabs.min.js )
 Rails.application.config.assets.precompile += %w( testing.js )
 Rails.application.config.assets.precompile += %w( memory.js )
+Rails.application.config.assets.precompile += %w( blackjack.js )
+Rails.application.config.assets.precompile += %w( stopwatch.js )
+Rails.application.config.assets.precompile += %w( spaceship.js )
 
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path

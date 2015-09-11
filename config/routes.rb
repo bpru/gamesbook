@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   
   get 'games/memory', to: 'games#memory', as: :memory
   get 'games/testing', to: 'games#testing', as: :testing
+  get 'games/blackjack', to: 'games#blackjack', as: :blackjack
+  get 'games/stopwatch', to: 'games#stopwatch', as: :stopwatch
+  get 'games/spaceship', to: 'games#spaceship', as: :spaceship
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

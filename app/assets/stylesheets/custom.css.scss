@@ -288,9 +288,15 @@ span.picture {
 /* games */
 
 #game {
-  text-align: center;
+  // text-align: center;
   canvas {
-    margin: 5px;
+    // margin: 5px;
+  }
+  #ctrl_panel {
+    .btn {
+      margin: 5px;
+      // width: 80px;
+    }
   }
 }
 

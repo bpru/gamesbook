@@ -5,5 +5,11 @@ class GamesController < ApplicationController
     end
     def memory
     end
+    def blackjack
+    end
+    def stopwatch
+    end
+    def spaceship
+    end
     
 end

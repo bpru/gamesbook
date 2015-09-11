@@ -1,0 +1,24 @@
+<% provide(:title, 'Blackjack') %>
+<%= javascript_include_tag 'blackjack' %> 
+<h1>Blackjack</h1>
+<%= render 'greeting' %>
+<!--<div class="row">-->
+<!--<div id="imgs" style="display:none;">-->
+<!--	<img src='/assets/poker_cards.png' id='cards'></img>-->
+<!--	<img src='/assets/poker_cards_back.png' id='cards_back'></img>-->
+<!--</div>-->
+
+<div id="game" class="row">
+    <div id="stat_panel" class="col-md-3">this is for status display</div>
+    <div class="col-md-6">
+		<canvas id="canvas" width="500" height="500" background-color="green"></canvas>
+		<div id="ctrl_panel">
+			<div class="row">
+				<button id="btn_deal" class="btn btn-primary col-md-4">Deal</button>
+				<button id="btn_hit" class="btn btn-primary col-md-4">Hit</button>
+				<button id="btn_stand" class="btn btn-primary col-md-4">Stand</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--</div>-->
