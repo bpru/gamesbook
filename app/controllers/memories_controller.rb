@@ -13,9 +13,7 @@ class MemoriesController < ApplicationController
     def create
         @memory = current_user.memories.create(memory_params);
         redirect_to memory_path
-        # respond_to do |format|
-        #     format.html
-        #     format.js
+        
     end
     
     private

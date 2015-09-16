@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906110444) do
+ActiveRecord::Schema.define(version: 20150911033536) do
+
+  create_table "blackjacks", force: :cascade do |t|
+    t.integer  "score"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "blackjacks", ["user_id", "created_at"], name: "index_blackjacks_on_user_id_and_created_at"
+  add_index "blackjacks", ["user_id"], name: "index_blackjacks_on_user_id"
 
   create_table "memories", force: :cascade do |t|
     t.integer  "score"

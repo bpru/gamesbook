@@ -1,0 +1,2 @@
+module BlackjacksHelper
+end

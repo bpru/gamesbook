@@ -1,0 +1,4 @@
+<ul class="memories" id="user-memories">
+    <%= render @user_memories %>
+    <%= will_paginate @user_memories, :param_name => 'user_memories_page' %>
+</ul>

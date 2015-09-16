@@ -1,26 +1,36 @@
 <% provide(:title, 'Blackjack') %>
 <%= javascript_include_tag 'blackjack' %> 
 <h1>Blackjack</h1>
+<div id="game">
 <%= render 'greeting' %>
-<!--<div class="row">-->
-<!--<div id="imgs" style="display:none;">-->
-<!--	<%= image_tag 'poker_cards.png', :id => "poker_cards" %>-->
-<!--	<%= image_tag 'poker_cards_back.png', :id => "poker_cards_back" %>-->
-	<!--<img src='/assets/poker_cards.png' id='cards'></img>-->
-	<!--<img src='/assets/poker_cards_back.png' id='cards_back'></img>-->
-<!--</div>-->
+<%= javascript_tag do %>
+	var guest = <%= !logged_in? %>;
+	<% if logged_in? %>
+		var bank = <%= current_user.blackjack.score %>;
+		var blackjack_id = <%= current_user.blackjack.id %>;
+	<% else %>
+		var bank = 500;
+	<% end %>
+<% end %>
 
-<div id="game" class="row">
-    <div id="stat_panel" class="col-md-3">this is for status display</div>
-    <div class="col-md-6">
-		<canvas id="canvas" width="500" height="500" background-color="green"></canvas>
-		<div id="ctrl_panel">
-			<div class="row">
-				<button id="btn_deal" class="btn btn-primary col-md-4">Deal</button>
-				<button id="btn_hit" class="btn btn-primary col-md-4">Hit</button>
-				<button id="btn_stand" class="btn btn-primary col-md-4">Stand</button>
-			</div>
-		</div>
+<div class="row">
+    <div id="game_info" class="col-md-3 col-sm-3">
+    	<p>rules</p>
+    </div>
+    <!--<div class="col-md-6 col-sm-6"  style="background-color:yellow">-->
+		<canvas class="col-md-6 col-sm-6" id="canvas" width="500" height="500" background-color="green"></canvas>
+	<!--</div>-->
+	<div id="game_ctrl" class="col-md-3 col-sm-3">
+		<button id="btn_deal" class="btn btn-primary">Deal</button><br>
+		<button id="btn_hit" class="btn btn-primary">Hit</button>
+		<button id="btn_stand" class="btn btn-primary">Stand</button>
+		<p style="text-align: left;">Set Bet ($10 ~ $500): <span id="bet_value">10</span></p>
+		<input type="range" min="10" max="500" value="10" step="10" onchange="set_bet(this.value)"/>
+		
+		
+		<button id="btn_reset" class="btn btn-primary">Reset Bank</button>
+	</div>
+		<%= link_to 'Show all records', blackjacks_path %>
 	</div>
 </div>
-<!--</div>-->
+</div>

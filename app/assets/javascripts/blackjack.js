@@ -1,4 +1,5 @@
 //=require_tree ./game_helpers
+
 $(document).ready(function() {  
     // $('body').css("background-image", "url('/assets/poker_cards.png')");
     // constants
@@ -12,11 +13,12 @@ $(document).ready(function() {
                                                 'T':10, 'J':10, 'Q':10, 'K':10};
     // game status
     var in_play = false;
+    var started = false;
     var msg = "Welcome!";
     var player = new Hand();
     var dealer = new Hand();
     var deck = new Deck();
-    var bank = 500;
+    // var bank = $("#bank").html();
     var bet = 10;
     
     // set canvas                     
@@ -24,15 +26,7 @@ $(document).ready(function() {
     canvas.css("background-color", "green");
 	var ctx = canvas[0].getContext("2d");
 	
-    // display welcome message
-	ctx.font = "36px Comic Sans MS";
-    ctx.fillStyle = "white";
-    ctx.textAlign = "center";
-    ctx.fillText("Welcome!", canvas[0].width/2,canvas[0].height/2 - 50);
-    ctx.font = "24px Comic Sans MS";
-    ctx.fillText('Press "Deal" to start!' , canvas[0].width/2,canvas[0].height/2 + 50);
-    ctx.font = "18px Comic Sans MS";
-    ctx.fillText('Chips: $' + bank, 60, canvas[0].height - 10);
+    
     
     // set images
     var cards = new Image();
@@ -46,9 +40,11 @@ $(document).ready(function() {
 	$("#btn_deal").click(deal);
 	$("#btn_hit").click(hit);
 	$("#btn_stand").click(stand);
+	$("#btn_reset").click(reset);
 	
 	var frame = create_frame();
 	frame.set_draw_handler(draw);
+	frame.start();
 	
 
     // classes
@@ -110,8 +106,17 @@ $(document).ready(function() {
     
     // buntton handlers
     function deal() {
-        frame.start();
-        if (in_play) {bank -= bet;}
+        bet = parseInt($("#bet_value").html());
+        started = true;
+       
+        if (bet > bank) {
+            alert("You don't have enough money");
+            return;
+        }
+        bank -= bet;
+        
+        
+        // if (in_play) {bank -= bet;}
         dealer = new Hand();
         player = new Hand();
         deck = new Deck();
@@ -125,7 +130,7 @@ $(document).ready(function() {
                 alert('Congratulation! YOU GOT BLACKJACK');
                 bank += bet/2;
                 $("#btn_stand").trigger("click");
-            }, 100)
+            }, 100);
         }
     };
     
@@ -135,16 +140,24 @@ $(document).ready(function() {
             if (player.get_val() > 21) {
                 msg = "BUSTED, YOU LOSE!!! NEW DEAL?";
                 in_play = false;
-                bank -= bet;
+                // bank -= bet;
+                save();
             } else if (player.collection.length >= 5) {
                 setTimeout(function() {
                     alert("FIVE CARD CHARLIE!!!");
+                    bank += bet;
                     bank += 2 * bet;
                     $("#btn_deal").trigger("click");
                 }, 100);
             }
         }
-        // timer.stop();
+    }
+    
+    
+    
+    function reset() {
+        bank = 500;
+        save();
     }
     
     function stand() {
@@ -153,39 +166,61 @@ $(document).ready(function() {
             var dealer_score = dealer.get_val();
             in_play = false;
             if (dealer_score <= 21 && dealer_score > player.get_val()) {
-                bank -= bet;
+                // bank -= bet;
                 msg = "YOU LOSE!!! NEW DEAL?";
             } else if (dealer_score == player.get_val()) {
                 msg = "TIE, ONE MORE?";
             } else {
-                bank += bet;
+                bank += 2 * bet;
                 msg = "YOU WIN!!! NEW DEAL?";
             }
+            save();
         }
     }
     
    function draw() {
         ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
-        if (in_play) {msg = "HIT or STAND?";}
-        ctx.font = "24px Comic Sans MS";
-        ctx.fillStyle = "white";
-        ctx.textAlign = "center";
-        ctx.fillText(msg, canvas[0].width/2, 50);
-        dealer.draw(50, 100);
-        if (in_play) {ctx.drawImage(cards_back, 0, 0, card_width, card_height,
-                                    50, 100, card_width, card_height);}
-        else {ctx.fillText("Dealer: " + dealer.get_val(), canvas[0].width/2, 250);}
-        player.draw(50, 300);
-        ctx.fillText("Player: " + player.get_val(), canvas[0].width/2, 450);
-        ctx.font = "18px Comic Sans MS";
-        ctx.fillText('Chips: $' + bank, 60, canvas[0].height - 10);
-        // ctx.fillText(cnt, 50, 50);
-    //     if (in_play) {
-    //         canvas.draw_text("Hit or Stand?", (200, 350), 24, "white")
-    // canvas.draw_text(outcome, (100, 350), 24, "white")
-    // canvas.draw_text("score: " + str(score), (500, 50), 24, "white")
-    // canvas.draw_text("BLACKJACK!!!", (200, 50), 24, "white")
-    // canvas.draw_text("Dealer:", (50, 250), 24, "white")
-    // canvas.draw_text("Player:", (50, 450), 24, "white")
+        var next_bet = parseInt($("#bet_value").html());
+        if (!started) {
+            // display welcome message
+        	ctx.font = "36px Comic Sans MS";
+            ctx.fillStyle = "white";
+            ctx.textAlign = "center";
+            ctx.fillText("Welcome!", canvas[0].width/2,canvas[0].height/2 - 50);
+            ctx.font = "24px Comic Sans MS";
+            ctx.fillText('Press "Deal" to start!' , canvas[0].width/2,canvas[0].height/2 + 50);
+            ctx.font = "18px Comic Sans MS";
+            ctx.fillText('Chips: $' + bank, 60, canvas[0].height - 10);
+            ctx.fillText('Next Bet: $' + next_bet, canvas[0].width - 80, canvas[0].height - 10);
+        } else {
+            if (in_play) {msg = "HIT or STAND?";}
+            ctx.font = "24px Comic Sans MS";
+            ctx.fillStyle = "white";
+            ctx.textAlign = "center";
+            ctx.fillText(msg, canvas[0].width/2, 50);
+            dealer.draw(50, 100);
+            if (in_play) {ctx.drawImage(cards_back, 0, 0, card_width, card_height,
+                                        50, 100, card_width, card_height);}
+            else {ctx.fillText("Dealer: " + dealer.get_val(), canvas[0].width/2, 250);}
+            player.draw(50, 300);
+            ctx.fillText("Player: " + player.get_val(), canvas[0].width/2, 450);
+            ctx.font = "18px Comic Sans MS";
+            ctx.fillText('Chips: $' + bank, 60, canvas[0].height - 10);
+            ctx.fillText('Bet: $' + bet, 60, canvas[0].height - 50);
+            ctx.fillText('Next Bet: $' + next_bet, canvas[0].width - 80, canvas[0].height - 10);
+        }
     }
+    
+    function save() {
+        if (!guest) {
+            $.ajax({url: '/blackjacks/' + blackjack_id,  data: {blackjack: {score: bank}}, method: 'patch'} );
+        }
+    }
+    // function create() {
+    //     $.post('/blackjacks', {blackjack: {score: bank}});
+    // }
 });
+
+function set_bet(value) {
+        $("#bet_value").html(value);
+    }

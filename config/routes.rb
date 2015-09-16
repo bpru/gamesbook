@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  
+
   get 'password_resets/new'
 
   get 'password_resets/edit'
@@ -14,6 +16,13 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
+  
+  get 'games/memory', to: 'games#memory', as: :memory
+  get 'games/testing', to: 'games#testing', as: :testing
+  get 'games/blackjack', to: 'games#blackjack', as: :blackjack
+  get 'games/stopwatch', to: 'games#stopwatch', as: :stopwatch
+  get 'games/spaceship', to: 'games#spaceship', as: :spaceship
+  
   resources :users do
     member do
       get :following, :followers
@@ -24,12 +33,8 @@ Rails.application.routes.draw do
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
   resources :memories,            only: [:create, :index]
+  resources :blackjacks,          only: [:create, :index, :update]
   
-  get 'games/memory', to: 'games#memory', as: :memory
-  get 'games/testing', to: 'games#testing', as: :testing
-  get 'games/blackjack', to: 'games#blackjack', as: :blackjack
-  get 'games/stopwatch', to: 'games#stopwatch', as: :stopwatch
-  get 'games/spaceship', to: 'games#spaceship', as: :spaceship
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

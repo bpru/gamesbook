@@ -1,0 +1,10 @@
+<li id="blackjack-<%= blackjack.id %>" style="list-style: none">
+     <%= link_to gravatar_for(blackjack.user, size: 50), blackjack.user %>
+    <span class="user"><%= link_to blackjack.user.name, blackjack.user %></span>
+    <span class="content">
+        $<%= blackjack.score %>
+    </span>
+    <span class="timestamp">
+        Played <%= time_ago_in_words(blackjack.created_at) %> ago.
+    </span>
+</li>

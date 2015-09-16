@@ -2,31 +2,63 @@
 <%= javascript_include_tag 'jquery.idTabs.min' %> 
 <h1>Memory Scores Board</h1>
 
-<div id="main">
+
+<!--<div id="main">-->
 <!--create tabs-->
-<ul class="idTabs">
-    <li><a href="#all">All Players</a></li>
+<ul class="nav nav-tabs" id="myTab">
+    <li class="active"><a href="#all" data-toggle="tab">All Players</a></li>
     <% if logged_in? %>
-        <li><a href="#user"><%= current_user.name %></a></li>
+        <li><a data-toggle="tab" href="#user"><%= current_user.name %></a></li>
     <% end %>
 </ul>
 
 
 <!--all players tab-->
-<div id="all">
-<ul class="memories">
-    <%= render @memories %>
-</ul>
-<%= will_paginate @memories, :param_name => 'memories_page' %>
-</div>
+<div class="tab-content">
+    <div id="all" class="tab-pane fade in active">
+        <%= render "all" %>
+    </div>
 
 <!--user tab-->
-<% if logged_in? %>
-<div id="user">
-<ul class="memories">
-    <%= render @user_memories %>
-</ul>
-<%= will_paginate @user_memories, :param_name => 'user_memories_page' %>
+    <% if logged_in? %>
+        <div id="user" class="tab-pane fade">
+            <%= render "user" %>
+        </div>
+    <% end %>
 </div>
-<% end %>
-</div>
+<%= link_to "back to game", memory_path %>
+
+
+<script>
+$(function () {  
+    $(document).on("click", '.pagination a', function () {  
+        $.get(this.href, null, null, 'script');
+        // $(".pagination .active").removeClass("active");
+        // $(this).parent().addClass("active");
+        return false;  
+    });  
+    
+    
+    
+    // $(".pagination a").attr("data-remote", true);
+});  
+// $(document).ready(function() {
+//         $("#myTab > li").click(function() {
+//         $(".tab-content > .in").removeClass("in");
+//         $(".tab-content > .active").addClass("in");
+        
+//     })
+// })
+//     $(document).ready(function() {
+//     if(location.hash) {
+//         $('a[href=' + location.hash + ']').tab('show');
+//     }
+//     $(document.body).on("click", "a[data-toggle]", function(event) {
+//         location.hash = this.getAttribute("href");
+//     });
+// });
+// $(window).on('popstate', function() {
+//     var anchor = location.hash || $("a[data-toggle=tab]").first().attr("href");
+//     $('a[href=' + anchor + ']').tab('show');
+// });
+</script>
