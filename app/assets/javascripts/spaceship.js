@@ -90,8 +90,6 @@ $(document).ready(function() {
     // timer.start();
     frame.start();
     
-    
-    
     function ImageInfo(center, size, radius, lifespan, animated) {
         this.center = center;
         this.size = size;

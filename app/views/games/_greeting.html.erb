@@ -1,5 +1,6 @@
 <P id="greeting">Hi <span id="name"></span>, welcome to the game!</P>
 <%= javascript_tag do %>
+    $("body").attr("data-no-turbolink", "");
     <% if logged_in? %>
         var logged_in = true;
         $("#name").html("<%= current_user.name %>");
