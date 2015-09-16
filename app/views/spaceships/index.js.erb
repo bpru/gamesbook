@@ -1,0 +1,4 @@
+$("#spaceships").html("<%= escape_javascript(render("all")) %>");
+<% if logged_in? %>
+    $("#user-spaceships").html("<%= escape_javascript(render("user")) %>");
+<% end %>

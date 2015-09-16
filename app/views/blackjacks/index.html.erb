@@ -1,8 +1,10 @@
 <% provide(:title, 'Blackjack Records') %>
 <h1>Blackjack Scores Board</h1>
+<%= link_to "Back to blackjack game", blackjack_path %><br><br>
 <div id="main">
 <ul class="blackjacks">
     <%= render @blackjacks %>
 </ul>
 <%= will_paginate @blackjacks, :param_name => 'blackjacks_page' %>
 </div>
+<%= link_to "Back to blackjack game", blackjack_path %>

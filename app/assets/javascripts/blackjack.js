@@ -147,6 +147,7 @@ $(document).ready(function() {
                     alert("FIVE CARD CHARLIE!!!");
                     bank += bet;
                     bank += 2 * bet;
+                    save();
                     $("#btn_deal").trigger("click");
                 }, 100);
             }
@@ -170,6 +171,7 @@ $(document).ready(function() {
                 msg = "YOU LOSE!!! NEW DEAL?";
             } else if (dealer_score == player.get_val()) {
                 msg = "TIE, ONE MORE?";
+                bank += bet;
             } else {
                 bank += 2 * bet;
                 msg = "YOU WIN!!! NEW DEAL?";
@@ -212,7 +214,7 @@ $(document).ready(function() {
     }
     
     function save() {
-        if (!guest) {
+        if (logged_in) {
             $.ajax({url: '/blackjacks/' + blackjack_id,  data: {blackjack: {score: bank}}, method: 'patch'} );
         }
     }

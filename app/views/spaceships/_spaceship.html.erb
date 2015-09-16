@@ -1,0 +1,10 @@
+<li id="spaceship-<%= spaceship.id %>">
+     <%= link_to gravatar_for(spaceship.user, size: 50), spaceship.user %>
+    <span class="user"><%= link_to spaceship.user.name, spaceship.user %></span>
+    <span class="content">
+        <%= spaceship.score %> points
+    </span>
+    <span class="timestamp">
+        Played <%= time_ago_in_words(spaceship.created_at) %> ago.
+    </span>
+</li>

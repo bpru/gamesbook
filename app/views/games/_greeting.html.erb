@@ -1,5 +1,11 @@
-<% if logged_in? %>
-    <p>Hi <%= current_user.name %>, welcome to the game!</p>
-<% else %>
-    <p id="guest">Hi there, welcome to the game! <br> In order to make your score recorded, please log in or sign up!</p>
+<P id="greeting">Hi <span id="name"></span>, welcome to the game!</P>
+<%= javascript_tag do %>
+    <% if logged_in? %>
+        var logged_in = true;
+        $("#name").html("<%= current_user.name %>");
+    <% else %>
+        var logged_in = false;
+        $("#name").html("there");
+        $("#greeting").append("<br> In order to make your score recorded, please log in or sign up!");
+    <% end %>
 <% end %>

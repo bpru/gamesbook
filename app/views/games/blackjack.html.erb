@@ -4,7 +4,6 @@
 <div id="game">
 <%= render 'greeting' %>
 <%= javascript_tag do %>
-	var guest = <%= !logged_in? %>;
 	<% if logged_in? %>
 		var bank = <%= current_user.blackjack.score %>;
 		var blackjack_id = <%= current_user.blackjack.id %>;

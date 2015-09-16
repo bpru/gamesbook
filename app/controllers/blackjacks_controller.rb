@@ -10,7 +10,7 @@ class BlackjacksController < ApplicationController
 
   def update
     current_user.blackjack.update_attributes(blackjack_params)
-    redirect_to blackjack_path
+    # redirect_to blackjack_path
   end
   
   private

@@ -68,7 +68,7 @@ $(document).ready(function() {
 							timer.stop();
 							setTimeout(function() {
 								var msg = 'you spent ' + format_time(time_spent) + "!";
-								if (!$("#guest").length > 0) {
+								if (logged_in) {
 									msg += " Do you want to save this record?";
 									if (confirm(msg)) {
 										var score = time_spent; 

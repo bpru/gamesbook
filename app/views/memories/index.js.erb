@@ -1,2 +1,4 @@
 $("#memories").html("<%= escape_javascript(render("all")) %>");
-$("#user-memories").html("<%= escape_javascript(render("user")) %>");
+<% if logged_in? %>
+    $("#user-memories").html("<%= escape_javascript(render("user")) %>");
+<% end %>

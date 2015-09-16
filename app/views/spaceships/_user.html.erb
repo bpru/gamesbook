@@ -1,0 +1,4 @@
+<ul class="spaceships" id="user-spaceships">
+    <%= render @user_spaceships %>
+    <%= will_paginate @user_spaceships, :param_name => 'user_spaceships_page' %>
+</ul>

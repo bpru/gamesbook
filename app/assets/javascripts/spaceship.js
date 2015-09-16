@@ -63,6 +63,10 @@ $(document).ready(function() {
     var lives = 3;
     var time = 0;
     var started = false;
+    var msg = "Welcome";
+    var alive = false;
+    var ask_save = false;
+    var saved = true;
     
     // initialize stuff
     var frame = create_frame();
@@ -83,7 +87,7 @@ $(document).ready(function() {
     var timer = create_timer(rock_spawner, 1000);
     
     // get things rolling
-    timer.start();
+    // timer.start();
     frame.start();
     
     
@@ -302,6 +306,13 @@ $(document).ready(function() {
         if (key.keyCode == 37) my_ship.reset_angle_vel();
         else if (key.keyCode == 39) my_ship.reset_angle_vel();
         else if (key.keyCode == 38) my_ship.set_thrust(false);
+        else if (key.keyCode == 13) {
+            if (ask_save && !saved) {
+                $.ajax({url: '/spaceships', type: 'POST', data: {spaceship: {score: score}}});
+                saved = true;
+				alert('saved');
+            }
+        }
     }
         
     // mouseclick handlers that reset UI and conditions whether splash image is drawn
@@ -317,6 +328,8 @@ $(document).ready(function() {
             score = 0;
             lives = 3;
             soundtrack.play();
+            alive = true;
+            ask_save = false;
         }
     }
 
@@ -335,8 +348,18 @@ $(document).ready(function() {
                                                             (WIDTH, HEIGHT));
         // draw UI
         ctx.font = "22px Comic Sans MS";
+        ctx.textAlign = "center";
         ctx.fillStyle = "white";    
-        if (group_collide(rock_group, my_ship)) lives -= 1;
+        if (group_collide(rock_group, my_ship)) {
+            lives -= 1;
+            alive = false;
+            rock_group = [];
+            setTimeout(function() {
+                if (lives > 0) my_ship = new Ship([WIDTH / 2, HEIGHT / 2],
+                                            [0, 0], 0, ship_image, ship_info);
+                alive = true;
+            }, 500);
+        }
         score += group_group_collide(missile_group, rock_group);
         
         
@@ -345,18 +368,35 @@ $(document).ready(function() {
             draw_image(splash_image, splash_info.get_center(), 
                     splash_info.get_size(), [WIDTH / 2, HEIGHT / 2], 
                                                 splash_info.get_size());
+            
+            if (ask_save) {
+                ctx.font = "18px Comic Sans MS";
+                ctx.fillText("Press <Enter> to save your score", WIDTH/2, 170);
+                ctx.font = "26px Comic Sans MS";
+                ctx.fillText(msg, WIDTH/2, 140);
+            } else ctx.fillText(msg, WIDTH/2, 160);
+            ctx.font = "16px Comic Sans MS";
+            ctx.fillText("Use <left> and <right> to control direction", WIDTH/2, 330);
+            ctx.fillText("Use <up> to accelerate", WIDTH/2, 355);
+            ctx.fillText("Press <space> to fire !!!", WIDTH/2, 380);
         } else {
     
             if (lives == 0) {
-                started = false;
-                timer.stop();
-                rock_group = [];
-                soundtrack.pause();
-                soundtrack.load();
-                my_ship = new Ship([WIDTH / 2, HEIGHT / 2], [0, 0], 0, ship_image, ship_info);
+                setTimeout(function() {
+                    msg = "Game Over";
+                    started = false;
+                    timer.stop();
+                    rock_group = [];
+                    soundtrack.pause();
+                    soundtrack.load();
+                    my_ship = new Ship([WIDTH / 2, HEIGHT / 2], [0, 0], 0, ship_image, ship_info);
+                    if (logged_in) ask_save = true;
+                    saved = false;
+                }, 500);
+                // alert("Your got " + score + " points!");
             }
             // draw ship and sprites
-            my_ship.draw();
+            if (alive) my_ship.draw();
             process_sprite_group(rock_group);
             process_sprite_group(missile_group);
             process_sprite_group(explosion_group);
@@ -365,10 +405,11 @@ $(document).ready(function() {
             // update ship and sprites
             my_ship.update();
         }
+        ctx.font = "22px Comic Sans MS";
         ctx.fillText("Lives", 50, 50);
-        ctx.fillText("Score", 680, 50);
+        ctx.fillText("Score", WIDTH - 50, 50);
         ctx.fillText(lives, 50, 80);
-        ctx.fillText(score, 680, 80);
+        ctx.fillText(score, WIDTH - 50, 80);
        
     }
 
@@ -385,6 +426,6 @@ $(document).ready(function() {
         var rock_avel = Math.random() * .2 - .1;
         rock_group.push(new Sprite(rock_pos, rock_vel, 0, rock_avel, asteroid_image, asteroid_info));
     }
-            
     
 });
+
