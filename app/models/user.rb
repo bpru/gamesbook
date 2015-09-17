@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
                             uniqueness: { case_sensitive: false }
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+    mount_uploader :picture, PictureUploader
     
     # Returns the hash digest of the given string.
     def User.digest(string)
@@ -118,5 +119,12 @@ class User < ActiveRecord::Base
         def create_activation_digest
             self.activation_token  = User.new_token
             self.activation_digest = User.digest(activation_token)
+        end
+        
+        # Validates the size of an uploaded picture.
+        def picture_size
+          if picture.size > 5.megabytes
+            errors.add(:picture, "should be less than 5MB")
+          end
         end
 end

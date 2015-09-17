@@ -3,9 +3,38 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user) do |f| %>
+    <%= form_for(@user, html: { multipart: true })  do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
-
+      
+      <%= f.label :picture %>
+      
+      <div class="row" style="text-align: center; margin:2px">
+        <div class="col-md-6">
+          <p><em>Your costume picture:</em></p>
+          <%= image_tag current_user.picture.url, size: "80", alt: "No Img" %>
+          <span class="picture">
+            <%= f.file_field :picture %>
+          </span>
+         
+        </div>
+      <!--class="gravatar_edit">-->
+        <div class="col-md-6">
+          <p><em>Your gravatar picture:</em></p>
+          <%= image_tag gravatar_url @user %><br>
+          <a href="http://gravatar.com/emails" target="_blank">change your gravatar picture</a>
+        </div>
+        
+      </div><br>
+      <div class="row" style="text-align: center; margin:2px">
+        <div class="col-md-6">
+           <%= f.radio_button :use_gravatar, false %>
+        </div>
+        <div class="col-md-6">
+           <%= f.radio_button :use_gravatar, true %>
+        </div>
+      </div>
+      
+      
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
 
@@ -17,13 +46,13 @@
 
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
-
+      
+      
+      
       <%= f.submit "Save changes", class: "btn btn-primary" %>
+      
     <% end %>
 
-    <div class="gravatar_edit">
-      <%= gravatar_for @user %>
-      <a href="http://gravatar.com/emails" target="_blank">change</a>
-    </div>
+    
   </div>
 </div>

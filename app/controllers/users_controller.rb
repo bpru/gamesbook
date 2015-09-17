@@ -34,8 +34,14 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
-      redirect_to @user
+      if !@user.picture? and !@user.use_gravatar
+        @user.use_gravatar = true
+        flash.now[:danger] = "Sorry, you don't have custome picture yet, please upload"
+        render 'edit'
+      else
+        flash[:success] = "Profile updated"
+        redirect_to @user
+      end
     else
       render 'edit'
     end
@@ -65,7 +71,7 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+                                   :password_confirmation, :picture, :use_gravatar)
     end
     
     # Before filters
