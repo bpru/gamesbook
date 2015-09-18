@@ -8,10 +8,22 @@
       
       <%= f.label :picture %>
       
-      <div class="row" style="text-align: center; margin:2px">
+      <div class="row" style="text-align: center" >
+        <div class="col-md-6 form-inline">
+          <!--<%= f.label :use_gravatar, "use or upload your own picture" %>-->
+          <%= f.radio_button :use_gravatar, false %>
+           
+        </div>
+        <div class="col-md-6">
+          <!--<%= f.label :use_gravatar, "use your gravatar picture" %>-->
+          <%= f.radio_button :use_gravatar, true %>
+        </div>
+      </div>
+      
+      <div class="row" style="text-align: center">
         <div class="col-md-6">
           <p><em>Your costume picture:</em></p>
-          <%= image_tag current_user.picture.url, size: "80", alt: "No Img" %>
+          <%= image_tag current_user.picture.url, size: "80", alt: "Plz upload" %>
           <span class="picture">
             <%= f.file_field :picture %>
           </span>
@@ -25,15 +37,6 @@
         </div>
         
       </div><br>
-      <div class="row" style="text-align: center; margin:2px">
-        <div class="col-md-6">
-           <%= f.radio_button :use_gravatar, false %>
-        </div>
-        <div class="col-md-6">
-           <%= f.radio_button :use_gravatar, true %>
-        </div>
-      </div>
-      
       
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>

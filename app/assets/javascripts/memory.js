@@ -67,16 +67,16 @@ $(document).ready(function() {
 						if (matched_pairs == 10) {
 							timer.stop();
 							setTimeout(function() {
-								var msg = 'you spent ' + format_time(time_spent) + "!";
+								var msg = 'You spent ' + time_spent/10 + ' seconds!';
 								if (logged_in) {
-									msg += " Do you want to save this record?";
+									msg += "\nDo you want to save this record?";
 									if (confirm(msg)) {
 										var score = time_spent; 
 										$.ajax({url: '/memories', type: 'POST', data: {memory: {score: score}}});
 										alert('saved');
 									};
 								} else {
-									var msg = 'you spent ' + format_time(time_spent);
+									
 									alert(msg);
 								}
 							}, 1000);

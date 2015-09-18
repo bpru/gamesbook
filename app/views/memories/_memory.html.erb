@@ -2,7 +2,7 @@
      <%= link_to gravatar_for(memory.user, size: 50), memory.user %>
     <span class="user"><%= link_to memory.user.name, memory.user %></span>
     <span class="content">
-        Finished in <%= memory.score %> seconds
+        Finished in <%= memory.score/10.0 %> seconds
     </span>
     <span class="timestamp">
         Played <%= time_ago_in_words(memory.created_at) %> ago.
