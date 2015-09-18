@@ -1,6 +1,8 @@
 //=require_tree ./game_helpers
 $(document).ready(function() {
 	var canvas = $("#canvas")[0];
+	var WIDTH = canvas.width;
+	var HEIGHT = canvas.height;
 	var ctx = canvas.getContext("2d");
 	var output = 0;
 	var total_try = 0;
@@ -45,10 +47,19 @@ $(document).ready(function() {
 	}
 	function draw() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		ctx.font = "96px serif";
-		ctx.fillText(format_time(output), 180, 300);
-		ctx.font = "48px serif";
-		ctx.fillText(format_try(), 270, 150);
+		
+        ctx.fillStyle = "white";
+        ctx.textAlign = "center";
+        ctx.font = "96px Comic Sans MS";
+		// ctx.font = "96px serif";
+		ctx.fillText(format_time(output), WIDTH/2, HEIGHT*2/3);
+		ctx.font = "18px Comic Sans MS";
+		// ctx.font = "48px serif";
+		ctx.fillText("success rate:" ,65, 20);
+		ctx.fillText(format_try(), 65, 50);
+		
+		ctx.fillText("total score:" ,WIDTH - 65, 20);
+		ctx.fillText("0" ,WIDTH - 65, 50);
 	}
 
 

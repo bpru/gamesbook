@@ -2,25 +2,15 @@
 <%= javascript_include_tag 'memory' %> 
 <h1>Memory Game</h1>
 <div id="game">
-	
-<%= render 'greeting' %>
-<h3 id="time">0:00:0</h3>
-<div class="row">
-	<div id="game_info" class="col-md-4">
-		<p>There are 10 pairs of cards with 10 different numbers on them, 
+	<%= render 'greeting' %>
+	<p>There are 10 pairs of cards with 10 different numbers on them, 
 			try to match each pair as fast as you can!</p>
-		<button id="btn_start" class="btn btn-primary">start</button>
-		<button id="btn_reset" class="btn btn-primary">reset</button>
-		
-	</div>
-	<div class="col-md-4">
-		
-		<canvas id="canvas" width="250" height="400" border="5px solid black"></canvas>
-	</div>
-	<div id="ctrl_panel" class="col-md-4">
-		<p>Want to see how good are you compared to other players?</p>
-		<%= link_to 'Show all records', memories_path %>
-	</div>
+	<h3 id="time">0:00:0</h3>
+	<canvas id="canvas" class="img-rounded" width="250" height="400" style="border:1px solid black"></canvas><br><br>
+	
+	<button id="btn_start" class="btn btn-primary">start</button>
+	<button id="btn_reset" class="btn btn-primary">reset</button>
+	<br><%= link_to 'Show all records', memories_path %>
 </div>
 
 	

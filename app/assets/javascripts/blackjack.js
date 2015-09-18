@@ -2,7 +2,14 @@
 
 $(document).ready(function() {  
     // $('body').css("background-image", "url('/assets/poker_cards.png')");
+    // set canvas                     
+    var canvas = $("#canvas");
+    canvas.css("background-color", "green");
+	var ctx = canvas[0].getContext("2d");
+	
     // constants
+    var WIDTH = canvas[0].width;
+    var HEIGHT = canvas[0].height;
     var CARD_SIZE = [72, 96];
     var card_width = CARD_SIZE[0];
     var card_height = CARD_SIZE[1];
@@ -11,6 +18,7 @@ $(document).ready(function() {
     var RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'];
     var VALUES = {'A':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9,
                                                 'T':10, 'J':10, 'Q':10, 'K':10};
+    var cards_start_pos_x = WIDTH/2 - 2 * card_width;
     // game status
     var in_play = false;
     var started = false;
@@ -21,10 +29,7 @@ $(document).ready(function() {
     // var bank = $("#bank").html();
     var bet = 10;
     
-    // set canvas                     
-    var canvas = $("#canvas");
-    canvas.css("background-color", "green");
-	var ctx = canvas[0].getContext("2d");
+    
 	
     
     
@@ -200,11 +205,11 @@ $(document).ready(function() {
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
             ctx.fillText(msg, canvas[0].width/2, 50);
-            dealer.draw(50, 100);
+            dealer.draw(cards_start_pos_x, 100);
             if (in_play) {ctx.drawImage(cards_back, 0, 0, card_width, card_height,
-                                        50, 100, card_width, card_height);}
+                                        cards_start_pos_x, 100, card_width, card_height);}
             else {ctx.fillText("Dealer: " + dealer.get_val(), canvas[0].width/2, 250);}
-            player.draw(50, 300);
+            player.draw(cards_start_pos_x, 300);
             ctx.fillText("Player: " + player.get_val(), canvas[0].width/2, 450);
             ctx.font = "18px Comic Sans MS";
             ctx.fillText('Chips: $' + bank, 60, canvas[0].height - 10);

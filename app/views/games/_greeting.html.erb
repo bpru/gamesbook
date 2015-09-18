@@ -1,4 +1,4 @@
-<P id="greeting">Hi <span id="name"></span>, welcome to the game!</P>
+<h4 id="greeting">Hi <span id="name"></span>, welcome to the game!</h4>
 <%= javascript_tag do %>
     $("body").attr("data-no-turbolink", "");
     <% if logged_in? %>
@@ -7,6 +7,6 @@
     <% else %>
         var logged_in = false;
         $("#name").html("there");
-        $("#greeting").append("<br> In order to make your score recorded, please log in or sign up!");
+        $("#greeting").append("<br><em>In order to make your score recorded, please log in or sign up!</em>");
     <% end %>
 <% end %>
