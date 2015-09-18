@@ -62,6 +62,7 @@ $(document).ready(function() {
     var score = 0;
     var lives = 3;
     var time = 0;
+    var level_time = 0;
     var started = false;
     var msg = "Welcome";
     var alive = false;
@@ -322,6 +323,7 @@ $(document).ready(function() {
         if ((!started) && inwidth && inheight) {
             started = true;
             time = 0;
+            level_time = 0;
             timer.start();
             score = 0;
             lives = 3;
@@ -332,7 +334,7 @@ $(document).ready(function() {
     }
 
     function draw() {
-        // ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
+        ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
         // animiate background
         time += 1;
         var wtime = (time / 4) % WIDTH;
@@ -414,13 +416,15 @@ $(document).ready(function() {
     // timer handler that spawns a rock    
     function rock_spawner() {
         if (rock_group.length >= 12) return;
+        level_time += 1;
         var rock_pos = [Math.floor(Math.random() * WIDTH), 
                     Math.floor(Math.random() * HEIGHT)];
         while (dist(rock_pos, my_ship.get_position()) < 3 * my_ship.get_radius()) {
             rock_pos = [Math.floor(Math.random() * WIDTH), 
                     Math.floor(Math.random() * HEIGHT)];
         }
-        var rock_vel = [Math.random() * .6 - .3, Math.random() * .6 - .3];
+        var rock_vel = [(Math.random() * .6 - .3) * level_time/2, (Math.random() * .6 - .3) * level_time/2];
+        // var rock_vel = [Math.random() * 8 - 4,  Math.random() * 8 - 4];
         var rock_avel = Math.random() * .2 - .1;
         rock_group.push(new Sprite(rock_pos, rock_vel, 0, rock_avel, asteroid_image, asteroid_info));
     }
