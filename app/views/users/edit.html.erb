@@ -30,10 +30,13 @@
         </div>
       <!--class="gravatar_edit">-->
         <div class="col-md-6">
-          <p><em>Your gravatar picture:</em></p>
+          <p><em>Your Gravatar picture: 
+            
+            </em></p>
           <%= f.radio_button :use_gravatar, true %><br><br>
           <%= image_tag gravatar_url @user %><br>
-          <a href="http://gravatar.com/emails" target="_blank">change your gravatar picture</a>
+          <%= link_to "What's Gravatar?", "https://en.gravatar.com/support/what-is-gravatar/", target: "_blank" %><br>
+          <a href="http://gravatar.com/emails" target="_blank">Change your Gravatar picture</a>
         </div>
         
       </div><br>
