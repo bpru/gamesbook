@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     if @user.update_attributes(user_params)
       if !@user.picture? and !@user.use_gravatar
         @user.use_gravatar = true
-        flash.now[:danger] = "Sorry, you don't have custome picture yet, please upload"
+        flash.now[:danger] = "Sorry, you haven't uploaded any picture yet, please upload."
         render 'edit'
       else
         flash[:success] = "Profile updated"
