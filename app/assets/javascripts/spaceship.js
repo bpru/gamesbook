@@ -309,7 +309,7 @@ $(document).ready(function() {
             if (ask_save && !saved) {
                 $.ajax({url: '/spaceships', type: 'POST', data: {spaceship: {score: score}}});
                 saved = true;
-				alert('saved');
+				alert('Your score: ' + score +' has been saved.');
             }
         }
     }
