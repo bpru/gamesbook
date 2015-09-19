@@ -4,7 +4,11 @@
     <section class="user_info">
       <%= gravatar_for @user %>
       <h1><%= @user.name %></h1>
-      <span><%= link_to "view my profile", @user %></span>
+      <% if @user == current_user %>
+        <span><%= link_to "view my profile", @user %></span>
+      <% else %>
+        <span><%= link_to "view #{@user.name}'s profile", @user %></span>
+      <% end %>
       <span><b>Microposts:</b> <%= @user.microposts.count %></span>
     </section>
     <section class="stats">
@@ -25,6 +29,22 @@
         <%= render @users %>
       </ul>
       <%= will_paginate %>
+    <% else %>
+      <% if @title == "Following" %>
+        <% if @user == current_user %>
+          <h4><em>Oops! Looks like you haven't followed anyone yet.<em></em></h4>
+          <h4><em>Find and follow your friends <%= link_to "here.", users_path %></em></h4>
+        <% else %>
+          <h4><em><%= @user.name %> hasn't followed anyone yet.</em></h4>
+        <% end %>
+      <% elsif @title == "Followers"%>
+        <% if @user == current_user %>
+          <h4><em>Oops! Looks like you haven't been followed by anyone yet.<em></em></h4>
+          <h4><em>Ask your friends to follow you now!</em></h4>
+        <% else %>
+          <h4><em><%= @user.name %> has not been followed by anyone yet.</em></h4>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
 </div>

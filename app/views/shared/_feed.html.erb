@@ -4,6 +4,7 @@
   </ol>
   <%= will_paginate @feed_items %>
 <% else %>
-  <h4><em>Oops! Looks like you haven't posted anything and followed anyone yet.<em></em></h4>
-  <h4><em>Post something or find and follow your friends <%= link_to "here.", users_path %></em></h4>
+  <h4><em>Oops! Looks like you and your friends haven't posted anything yet.<em></em></h4>
+  <h4><em>Post something to share with your firends now!</em></h4>
+  <h4><em>Find and follow your friends <%= link_to "here.", users_path %></em></h4>
 <% end %>

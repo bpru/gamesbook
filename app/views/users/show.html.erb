@@ -7,7 +7,9 @@
         <%= @user.name %>
       </h1>
     </section>
-    <%= link_to "Change profile picture", edit_user_path %>
+    <% if @user == current_user %>
+      <%= link_to "Change profile picture", edit_user_path %>
+    <% end %>
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
@@ -20,6 +22,13 @@
         <%= render @microposts %>
       </ol>
       <%= will_paginate @microposts %>
+    <% else %>
+      <% if @user == current_user %>
+        <h4><em>Oops! Looks like you haven't posted anything yet.<em></em></h4>
+        <h4><em>Post something to share with your friends <%= link_to "now!", root_path %></em></h4>
+      <% else %>
+        <h4><em><%= @user.name %> hasn't posted anything yet.</em></h4>
+      <% end %>
     <% end %>
   </div>
 </div>
