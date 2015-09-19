@@ -1,0 +1,10 @@
+<li id="stopwatch-<%= stopwatch.id %>">
+     <%= link_to gravatar_for(stopwatch.user, size: 50), stopwatch.user %>
+    <span class="user"><%= link_to stopwatch.user.name, stopwatch.user %></span>
+    <span class="content">
+        Get <%= stopwatch.score %> points in <%= pluralize(stopwatch.total_try, "try") %>.
+    </span>
+    <span class="timestamp">
+        Played <%= time_ago_in_words(stopwatch.created_at) %> ago.
+    </span>
+</li>

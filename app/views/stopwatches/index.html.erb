@@ -1,0 +1,41 @@
+<% provide(:title, "Memory Scores Board") %>
+<%= javascript_include_tag 'jquery.idTabs.min' %> 
+<h1>Stopwatch Scores Board</h1>
+
+
+
+<!--create tabs-->
+<%= link_to "back to stopwatch game", stopwatch_path %><br><br>
+<ul class="nav nav-tabs" id="myTab">
+    <li class="active"><a href="#all" data-toggle="tab">All Players</a></li>
+    <% if logged_in? %>
+        <li><a data-toggle="tab" href="#user"><%= current_user.name %></a></li>
+    <% end %>
+</ul>
+
+
+<!--all players tab-->
+<div class="tab-content">
+    <div id="all" class="tab-pane fade in active">
+        <%= render "all" %>
+    </div>
+
+<!--user tab-->
+    <% if logged_in? %>
+        <div id="user" class="tab-pane fade">
+            <%= render "user" %>
+        </div>
+    <% end %>
+</div>
+<%= link_to "back to stopwatch game", stopwatch_path %>
+
+
+<script>
+$(function () {  
+    $(document).on("click", '.pagination a', function () {  
+        $.get(this.href, null, null, 'script');
+        return false;  
+    });  
+    // $(".pagination a").attr("data-remote", true);
+});  
+</script>

@@ -1,0 +1,4 @@
+$("#stopwatches").html("<%= escape_javascript(render("all")) %>");
+<% if logged_in? %>
+    $("#user-stopwatches").html("<%= escape_javascript(render("user")) %>");
+<% end %>

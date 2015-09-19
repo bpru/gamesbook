@@ -7,6 +7,7 @@ $(document).ready(function() {
 	var output = 0;
 	var total_try = 0;
 	var success = 0;
+	var score = 0;
 	timer = create_timer(count, 100);
 	
 
@@ -21,7 +22,10 @@ $(document).ready(function() {
 	$("#btn_stop").click(function() {
 		if (timer.is_running) { 
 			timer.stop();
-			if (output%10 == 0) {success++;};
+			if (output%10 == 0) {
+				success++;
+				score += 10;
+			};
 			total_try++; 
 		}
 	});
@@ -31,6 +35,22 @@ $(document).ready(function() {
 		output = 0;
 		success = 0;
 		total_try = 0;
+		score = 0;
+	});
+	
+	$("#btn_save").click(function save() {
+		if(score + total_try == 0) {
+			alert("You have nothing to save.\nPlease start the game");
+			return;
+		}
+		if (!logged_in) {
+			alert("You need to log in or sign up \nto have your score saved!");
+			return;
+		}
+		$.ajax({url: '/stopwatches', type: 'POST', 
+			data: {stopwatch: {score: score, total_try: total_try}}});
+		alert("Your score has been saved.");
+		$("#btn_reset").trigger("click");
 	});
 	
 	function format_time(t) {
@@ -59,13 +79,15 @@ $(document).ready(function() {
 		ctx.fillText(format_try(), 65, 50);
 		
 		ctx.fillText("total score:" ,WIDTH - 65, 20);
-		ctx.fillText("0" ,WIDTH - 65, 50);
+		ctx.fillText(score ,WIDTH - 65, 50);
 	}
 
 
 	function count() {
 		output++;
 	}
+	
+	
 });
 
 

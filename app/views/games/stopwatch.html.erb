@@ -4,10 +4,12 @@
 <div id="game">
 	<%= render 'greeting' %>
 	<p>Try to stop the watch so that the number of seconds is a whole number!</p>
-	<canvas id="canvas" class="img-rounded" width="400" height="250" style="background-color:black"></canvas>
+	<canvas id="canvas" class="img-rounded" width="410" height="250" style="background-color:black"></canvas>
 <div id="ctrl_panel">
 	<button id="btn_start" class="btn btn-success">start</button>
 	<button id="btn_stop" class="btn btn-danger">stop</button>
 	<button id="btn_reset" class="btn btn-warning">reset</button>
+	<button id="btn_save" class="btn btn-primary">save</button>
 </div>
+<%= link_to "Show all records", stopwatches_path %>
 </div>

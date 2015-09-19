@@ -1,0 +1,4 @@
+<ul class="stopwatches" id="user-stopwatches">
+    <%= render @user_stopwatches %>
+    <%= will_paginate @user_stopwatches, :param_name => 'user_stopwatches_page' %>
+</ul>

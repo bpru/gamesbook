@@ -34,7 +34,8 @@ Rails.application.routes.draw do
   resources :relationships,       only: [:create, :destroy]
   resources :memories,            only: [:create, :index]
   resources :blackjacks,          only: [:create, :index, :update]
-  resources :spaceships,           only: [:create, :index]
+  resources :spaceships,          only: [:create, :index]
+  resources :stopwatches,         only: [:create, :index]
   
   
   # The priority is based upon order of creation: first created -> highest priority.
