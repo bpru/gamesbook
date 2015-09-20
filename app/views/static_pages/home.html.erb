@@ -1,6 +1,13 @@
 <% if logged_in? %>
+
   <div class="row">
     <aside class="col-md-4">
+      <% if !@return_url.nil? %>
+        <div class="alert alert-success">
+          <strong>Welcome back!</strong><br>
+          <%= link_to "Go back to the page before logging in?", @return_url %>
+        </div>
+      <% end %>
       <section class="user_info">
         <%= render 'shared/user_info' %>
       </section>

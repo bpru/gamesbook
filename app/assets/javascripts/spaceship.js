@@ -376,7 +376,7 @@ $(document).ready(function() {
                 ctx.fillText(msg, WIDTH/2, 140);
             } else ctx.fillText(msg, WIDTH/2, 160);
             ctx.font = "16px Comic Sans MS";
-            ctx.fillText("Use <left> and <right> to control direction", WIDTH/2, 330);
+            ctx.fillText("Use <left> and <right> to control directions", WIDTH/2, 330);
             ctx.fillText("Use <up> to accelerate", WIDTH/2, 355);
             ctx.fillText("Press <space> to fire !!!", WIDTH/2, 380);
         } else {

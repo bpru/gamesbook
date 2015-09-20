@@ -1,13 +1,22 @@
-<h4 id="greeting">Hi <span id="name"></span>, welcome to the game!</h4>
-<%= javascript_tag do %>
-    $("body").attr("data-no-turbolink", "");
-    <% if logged_in? %>
-        var logged_in = true;
-        $("#name").html("<%= current_user.name %>");
-    <% else %>
-        var logged_in = false;
-        $("#name").html("there");
-        $("#greeting").append("<br><em>To make your score recorded, please log in or sign up!");
-        
+<div class="greeting">
+    <h4 id="greeting">Hi <span id="name"></span>, welcome to the game!</h4>
+    <% if !logged_in? %>
+        <p id="logged" display="none"><em>To make your score recorded, please <a href="/login">log in</a> or <a href="/signup">sign up</a></p>
     <% end %>
-<% end %>
+    <%= javascript_tag do %>
+        $("body").attr("data-no-turbolink", "");
+        <% if logged_in? %>
+            var logged_in = true;
+            $("#name").html("<%= current_user.name %>");
+        <% else %>
+            var logged_in = false;
+            $("#name").html("there");
+            <!--$("#logged").removeAttr("display");-->
+            <!--var login = "<a href="/login">log in</a>";-->
+            <!--var signup = "<a href="/signup">sign up</a>";-->
+            
+            <!--$(".greeting").append("<br></em>");-->
+            
+        <% end %>
+    <% end %>
+</div>

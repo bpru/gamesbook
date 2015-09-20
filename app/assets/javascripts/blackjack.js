@@ -190,12 +190,33 @@ $(document).ready(function() {
         var next_bet = parseInt($("#bet_value").html());
         if (!started) {
             // display welcome message
-        	ctx.font = "36px Comic Sans MS";
+        	ctx.font = "40px Comic Sans MS";
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
-            ctx.fillText("Welcome!", canvas[0].width/2,canvas[0].height/2 - 50);
+            ctx.fillText("Welcome!", canvas[0].width/2, 50);
+            
+            ctx.font = "18px Comic Sans MS";
+            
+            ctx.fillText("Get value higher than dealer but not more than 21", canvas[0].width/2, 125);
+            ctx.fillText("Dealer has to get value higher than 17 to end the play", canvas[0].width/2, 150);
+            ctx.fillText("Face cards have value of 10", canvas[0].width/2, 175);
+            ctx.fillText("Ace has value of 1 or 11", canvas[0].width/2, 200);
+            
+            ctx.fillText("Get 21 points with the first 2 cards to win 50% more bet back", canvas[0].width/2, 275);
             ctx.font = "24px Comic Sans MS";
-            ctx.fillText('Press "Deal" to start!' , canvas[0].width/2,canvas[0].height/2 + 50);
+            ctx.fillText("BLACKJACK:", canvas[0].width/2, 250);
+            ctx.fillText("To win the play:", canvas[0].width/2, 100);
+            
+            
+            
+            ctx.font = "20px Comic Sans MS";
+            ctx.fillText('Press "Deal" to start a new play' , canvas[0].width/2, 325);
+            ctx.fillText('Press "Hit" to get another card from dealer' , canvas[0].width/2, 350);
+            ctx.fillText('Press "Stand" to stay with current cards', canvas[0].width/2 , 375);
+            ctx.fillText('Press "Reset Bank" to reset your bank to $500', canvas[0].width/2 , 400);
+            ctx.fillText('Use scroller to set money for next bet' , canvas[0].width/2, 425);
+            
+            
             ctx.font = "18px Comic Sans MS";
             ctx.fillText('Chips: $' + bank, 60, canvas[0].height - 10);
             ctx.fillText('Next Bet: $' + next_bet, canvas[0].width - 80, canvas[0].height - 10);

@@ -14,6 +14,11 @@
 
 	<canvas id="canvas" class="img-rounded" width="600" height="500" style="border: 1px solid black" background-color="green"></canvas>
 	<br>
+	
+	<button id="btn_deal" class="btn btn-info">Deal</button>
+	<button id="btn_hit" class="btn btn-success">Hit</button>
+	<button id="btn_stand" class="btn btn-danger">Stand</button>
+	<button id="btn_reset" class="btn btn-warning">Reset Bank</button>
 	<div class="row">
 		<div>
 			<p>Set Bet ($10 ~ $500): <span id="bet_value">10</span></p>
@@ -22,11 +27,6 @@
 			</div>
 		</div>
 	</div>
-	<button id="btn_deal" class="btn btn-info">Deal</button>
-	<button id="btn_hit" class="btn btn-success">Hit</button>
-	<button id="btn_stand" class="btn btn-danger">Stand</button>
-	<button id="btn_reset" class="btn btn-warning">Reset Bank</button>
-	<br>
 	<%= link_to 'Show all records', blackjacks_path %>
 </div>
 
