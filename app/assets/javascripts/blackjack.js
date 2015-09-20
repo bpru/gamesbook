@@ -132,7 +132,7 @@ $(document).ready(function() {
         in_play = true;
         if (player.get_val() == 21){
             setTimeout(function() {
-                alert('Congratulation! YOU GOT BLACKJACK');
+                alert("Congratulation! YOU'VE GOT BLACKJACK");
                 bank += bet/2;
                 $("#btn_stand").trigger("click");
             }, 100);
@@ -143,7 +143,7 @@ $(document).ready(function() {
         if (in_play) {
             player.add_card(deck.deal_card());
             if (player.get_val() > 21) {
-                msg = "BUSTED, YOU LOSE!!! NEW DEAL?";
+                msg = "BURSTED, YOU LOSE!!! NEW DEAL?";
                 in_play = false;
                 // bank -= bet;
                 save();
@@ -173,7 +173,7 @@ $(document).ready(function() {
             in_play = false;
             if (dealer_score <= 21 && dealer_score > player.get_val()) {
                 // bank -= bet;
-                msg = "YOU LOSE!!! NEW DEAL?";
+                msg = "YOU LOSE...NEW DEAL?";
             } else if (dealer_score == player.get_val()) {
                 msg = "TIE, ONE MORE?";
                 bank += bet;
@@ -197,7 +197,7 @@ $(document).ready(function() {
             
             ctx.font = "18px Comic Sans MS";
             
-            ctx.fillText("Get value higher than dealer but not more than 21", canvas[0].width/2, 125);
+            ctx.fillText("Get a total value higher than dealer's but no more than 21", canvas[0].width/2, 125);
             ctx.fillText("Dealer has to get value higher than 17 to end the play", canvas[0].width/2, 150);
             ctx.fillText("Face cards have value of 10", canvas[0].width/2, 175);
             ctx.fillText("Ace has value of 1 or 11", canvas[0].width/2, 200);
@@ -211,7 +211,7 @@ $(document).ready(function() {
             
             ctx.font = "20px Comic Sans MS";
             ctx.fillText('Press "Deal" to start a new play' , canvas[0].width/2, 325);
-            ctx.fillText('Press "Hit" to get another card from dealer' , canvas[0].width/2, 350);
+            ctx.fillText('Press "Hit" to get another card from deck' , canvas[0].width/2, 350);
             ctx.fillText('Press "Stand" to stay with current cards', canvas[0].width/2 , 375);
             ctx.fillText('Press "Reset Bank" to reset your bank to $500', canvas[0].width/2 , 400);
             ctx.fillText('Use scroller to set money for next bet' , canvas[0].width/2, 425);

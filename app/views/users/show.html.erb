@@ -1,6 +1,8 @@
 <% provide(:title, @user.name) %>
 <div class="row">
+  
   <aside class="col-md-4">
+    <!--user status area-->
     <section>
       <h1>
         <%= gravatar_for @user %>
@@ -13,7 +15,17 @@
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
+    
+    <!--game records area-->
+    <br>
+    <div class="user-game-records">
+      <%= render 'user_game_records' %>
+    </div>
+    
   </aside>
+  
+  
+  <!--microposts area-->
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
