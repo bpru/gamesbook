@@ -143,7 +143,7 @@ $(document).ready(function() {
         if (in_play) {
             player.add_card(deck.deal_card());
             if (player.get_val() > 21) {
-                msg = "BURSTED, YOU LOSE!!! NEW DEAL?";
+                msg = "BURSTED, YOU LOSE...NEW DEAL?";
                 in_play = false;
                 // bank -= bet;
                 save();
