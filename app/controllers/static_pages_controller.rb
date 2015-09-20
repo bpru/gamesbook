@@ -2,7 +2,7 @@ class StaticPagesController < ApplicationController
   def home
     if logged_in?
       @return_url = nil
-      if show_previous? and session[:previous_page] != root_url and session[:previous_page] != login_url
+      if show_previous? and session[:previous_page] != root_url and session[:previous_page] != login_url and session[:previous_page] != signup_url
         @return_url = session[:previous_page]
         session[:previous_page] = nil
       end
